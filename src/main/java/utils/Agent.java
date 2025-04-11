@@ -39,4 +39,25 @@ public class Agent extends User{
         validateString(agentName);
         this.agentName = agentName;
     }
+
+    /**
+     * Checks if two agents are the same
+     * (Agents are equal if they share the same ID)
+     * @param o Agent being checked
+     * @return true if equal false otherwise
+     * @author Oscar Figeac
+     */
+    @Override
+    public boolean equals(Object o){
+        if(!(o instanceof Agent)){
+            return false;
+        }
+
+        Agent a = (Agent) o;
+
+        if(!this.agentId.equals(((Agent) o).agentId)){
+            return false;
+        }
+        return true;
+    }
 }
