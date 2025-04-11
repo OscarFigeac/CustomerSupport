@@ -53,4 +53,25 @@ public class User {
             throw new IllegalArgumentException("Parameter cannot be null");
         }
     }
+
+    /**
+     * Checks if two users are the same
+     * (Users are equal if the usernames are the same)
+     * @param o Username being checked
+     * @return Returns true if the users are equal and false if not
+     * @author Tommasz Januszkiewicz
+     */
+    @Override
+    public boolean equals(Object o){
+        if(!(o instanceof User)){
+            return false;
+        }
+
+        User u = (User) o;
+
+        if(!this.username.equals(((User) o).username)){
+            return false;
+        }
+        return true;
+    }
 }
