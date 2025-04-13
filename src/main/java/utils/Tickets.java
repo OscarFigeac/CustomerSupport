@@ -13,6 +13,15 @@ public class Tickets {
     private String status;
 
     //Constructors
+    public Tickets(String id, String desc, int priority, LocalDateTime createDate, String user, String agentID, String stat){
+        this.ticketId = id;
+        this.issueDesc = desc;
+        this.priorityLvl = priority;
+        this.creation = createDate;
+        this.username = user;
+        this.agentId = agentID;
+        this.status = stat;
+    }
 
     //Getters
 
