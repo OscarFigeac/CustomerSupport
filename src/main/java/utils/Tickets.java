@@ -24,6 +24,27 @@ public class Tickets {
     }
 
     //Getters
+    public String getTicketId() {
+        return ticketId;
+    }
+    public String getIssueDesc() {
+        return issueDesc;
+    }
+    public int getPriorityLvl() {
+        return priorityLvl;
+    }
+    public LocalDateTime getCreation() {
+        return creation;
+    }
+    public String getUsername() {
+        return username;
+    }
+    public String getAgentId() {
+        return agentId;
+    }
+    public String getStatus() {
+        return status;
+    }
 
     //Setters
 
