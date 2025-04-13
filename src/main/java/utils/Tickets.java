@@ -48,5 +48,18 @@ public class Tickets {
 
     //Setters
 
+
     //equals()
+
+
+    //Validation Methods
+    private static void validateString(String toBeValidated){
+        if(toBeValidated == null){
+            throw new IllegalArgumentException("Parameter cannot be null");
+        }
+        if(toBeValidated.equals("")){
+            throw new IllegalArgumentException("Parameter cannot be empty");
+        }
+    }
+
 }
