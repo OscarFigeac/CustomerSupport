@@ -1,6 +1,7 @@
 package utils;
 
 import java.time.LocalDateTime;
+import java.util.Scanner;
 
 public class Tickets {
     //Attributes
@@ -59,6 +60,7 @@ public class Tickets {
     }
 
 
+
     //equals()
 
 
@@ -71,5 +73,20 @@ public class Tickets {
             throw new IllegalArgumentException("Parameter cannot be empty");
         }
     }
+    private static boolean validateInt(int toBeValidated){
+        Scanner kb = new Scanner(System.in);
+        boolean check = false;
 
+        while(!check){
+            if(toBeValidated >= 1 && toBeValidated <= 5){
+                check = true;
+            }
+            else{
+                System.out.println("Enter a new integer between 1 and 5:");
+                toBeValidated = kb.nextInt();
+            }
+        }
+
+        return check;
+    }
 }
