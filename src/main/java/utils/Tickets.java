@@ -47,6 +47,11 @@ public class Tickets {
     }
 
     //Setters
+    public void setTicketId(String ticketId) {
+        validateString(ticketId);
+
+        this.ticketId = ticketId;
+    }
 
 
     //equals()
