@@ -52,6 +52,11 @@ public class Tickets {
 
         this.ticketId = ticketId;
     }
+    public void setIssueDesc(String issueDesc) {
+        validateString(issueDesc);
+
+        this.issueDesc = issueDesc;
+    }
 
 
     //equals()
