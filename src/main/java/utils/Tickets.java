@@ -73,6 +73,9 @@ public class Tickets {
         this.agentId = agentId;
     }
 
+    public void setStatus(String status) {
+        this.status = statusOptions(status);
+    }
     //equals()
 
 
