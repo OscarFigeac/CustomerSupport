@@ -63,7 +63,13 @@ public class Tickets {
 
         this.priorityLvl = priorityLvl;
     }
-//equals()
+
+    public void setUsername(String username) {
+        validateString(username);
+
+        this.username = username;
+    }
+    //equals()
 
 
     //Validation Methods
