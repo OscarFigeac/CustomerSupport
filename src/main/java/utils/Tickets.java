@@ -101,4 +101,35 @@ public class Tickets {
 
         return toBeValidated;
     }
+    private static String statusOptions(String stat){
+        Scanner kb = new Scanner(System.in);
+        String option1 = "Pending";
+        String option2 = "In Progress";
+        String option3 = "Stalled";
+        String option4 = "Solved";
+
+        boolean check = false;
+
+        while(!check){
+            if(stat.equalsIgnoreCase(option1)){
+                check = true;
+            }
+            else if(stat.equalsIgnoreCase(option2)){
+                check = true;
+            }
+            else if(stat.equalsIgnoreCase(option3)){
+                check = true;
+            }
+            else if(stat.equalsIgnoreCase(option4)){
+                check = true;
+            }
+            else{
+                System.out.println("Enter option was unsuitable, choices are: 'Pending', 'In Progress', 'Stalled' and 'Solved'");
+                stat = kb.nextLine();
+                kb.next();
+            }
+        }
+
+        return stat;
+    }
 }
