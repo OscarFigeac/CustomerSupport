@@ -8,7 +8,7 @@ public class Tickets {
     private String ticketId;
     private String issueDesc;
     private int priorityLvl;
-    private LocalDateTime creation;
+    private final LocalDateTime creation;
     private String username;
     private String agentId;
     private String status;
@@ -72,12 +72,19 @@ public class Tickets {
 
         this.agentId = agentId;
     }
-
     public void setStatus(String status) {
         this.status = statusOptions(status);
     }
-    //equals()
 
+    //equals()
+    @Override
+    public boolean equals(Object ob) {
+        if(!(ob instanceof Tickets t)){
+            return false;
+        }
+
+        return this.ticketId.equals(t.ticketId);
+    }
 
     //Validation Methods
     private static void validateString(String toBeValidated){
