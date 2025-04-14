@@ -62,12 +62,17 @@ public class Tickets {
 
         this.priorityLvl = validateInt(priorityLvl);
     }
-
     public void setUsername(String username) {
         validateString(username);
 
         this.username = username;
     }
+    public void setAgentId(String agentId) {
+        validateString(agentId);
+
+        this.agentId = agentId;
+    }
+
     //equals()
 
 
