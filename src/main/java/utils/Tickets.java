@@ -58,10 +58,12 @@ public class Tickets {
 
         this.issueDesc = issueDesc;
     }
+    public void setPriorityLvl(int priorityLvl) {
+        validateInt(priorityLvl);
 
-
-
-    //equals()
+        this.priorityLvl = priorityLvl;
+    }
+//equals()
 
 
     //Validation Methods
