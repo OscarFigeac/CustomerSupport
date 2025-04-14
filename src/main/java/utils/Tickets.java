@@ -59,9 +59,8 @@ public class Tickets {
         this.issueDesc = issueDesc;
     }
     public void setPriorityLvl(int priorityLvl) {
-        validateInt(priorityLvl);
 
-        this.priorityLvl = priorityLvl;
+        this.priorityLvl = validateInt(priorityLvl);
     }
 
     public void setUsername(String username) {
@@ -81,7 +80,7 @@ public class Tickets {
             throw new IllegalArgumentException("Parameter cannot be empty");
         }
     }
-    private static boolean validateInt(int toBeValidated){
+    private static int validateInt(int toBeValidated){
         Scanner kb = new Scanner(System.in);
         boolean check = false;
 
@@ -95,6 +94,6 @@ public class Tickets {
             }
         }
 
-        return check;
+        return toBeValidated;
     }
 }
