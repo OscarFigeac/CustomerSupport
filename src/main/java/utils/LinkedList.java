@@ -31,6 +31,27 @@ public class LinkedList {
         return numOfElements == 0;
     }
 
+    /**
+     * Takes in a User object to be added to the end of the List
+     * @param user the object to be added
+     * @throws IllegalArgumentException if the parameter is null
+     * @author Oscar Figeac
+     */
+    public void add(User user){
+        if (user == null){
+            throw new IllegalArgumentException("Passed parameter cannot be null");
+        }
+        Node newNode = new Node(user);
+        if (first == null){
+            first = newNode;
+            last = newNode;
+        } else{
+            last.next = newNode;
+            last = newNode;
+        }
+        numOfElements++;
+    }
+
     public static class Node {
         private User data;
         private Node next;
