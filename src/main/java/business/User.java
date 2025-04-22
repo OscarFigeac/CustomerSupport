@@ -1,4 +1,4 @@
-package utils;
+package business;
 
 public class User {
     private String username;

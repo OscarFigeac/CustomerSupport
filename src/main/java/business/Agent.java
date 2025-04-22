@@ -1,4 +1,4 @@
-package utils;
+package business;
 
 public class Agent extends User{
     String agentId;
