@@ -62,7 +62,7 @@ public class LinkedList {
      */
     public User get(int pos) {
         if (isEmpty() || pos < 0 || pos >= numOfElements) {
-            throw new IndexOutOfBoundsException("Index must be between 0 and " + numOfElements + ". " +
+            throw new IndexOutOfBoundsException("Index must be between 0 and " + (numOfElements-1) + ". " +
                     "(Supplied index was " + pos + ").");
         }
         Node current = first;
@@ -70,6 +70,41 @@ public class LinkedList {
             current = current.next;
         }
         return current.data;
+    }
+
+    public User remove(int pos){
+        if(isEmpty() || pos < 0 || pos >= numOfElements){
+            throw new IndexOutOfBoundsException("Index must be between 0 and " + (numOfElements-1) + " inclusive. " +
+                    "(Supplied" +
+                    " index was" +
+                    " " + pos+")");
+        }
+
+        User removed = null;
+        if (pos == 0){
+            removed = first.data;
+            first = first.next;
+            if (first == null){
+                last = null;
+            }
+        } else{
+            Node current = first;
+            Node prev = null;
+
+            for (int i = 0; i < pos; i++) {
+                prev = current;
+                current = current.next;
+            }
+            removed = current.data;
+            prev.next = current.next;
+            current.next = null;
+            if (prev.next == null){
+                last = prev;
+            }
+        }
+        numOfElements--;
+
+        return removed;
     }
 
     public static class Node {
