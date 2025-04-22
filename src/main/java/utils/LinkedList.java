@@ -107,6 +107,28 @@ public class LinkedList {
         return removed;
     }
 
+    /**
+     * Takes in a user and retrieves its position
+     * @param user The user being looked for
+     * @return The position in which the object was found, -1 otherwise
+     * @throws IllegalArgumentException if the provided data is null
+     * @author Oscar Figeac
+     */
+    public int indexOf(User user){
+        if (user == null){
+            throw new IllegalArgumentException("Passed parameter cannot be null");
+        }
+        Node newNode = new Node(user);
+        Node current = first;
+        for (int i = 0; i <= numOfElements; i++) {
+            if (current.equals(newNode)) {
+                return i;
+            }
+            current = current.next;
+        }
+        return -1;
+    }
+
     public static class Node {
         private User data;
         private Node next;
