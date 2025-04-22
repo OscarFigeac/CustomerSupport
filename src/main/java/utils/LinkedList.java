@@ -52,6 +52,26 @@ public class LinkedList {
         numOfElements++;
     }
 
+    /**
+     * Indicates the user Object stored at a position passed as a parameter.
+     * @param pos the position being looked for
+     * @return the data found at the provided position
+     * @throws IndexOutOfBoundsException if the passed parameter is less than 0 or
+     * greater than the number of elements
+     * @author Oscar Figeac
+     */
+    public User get(int pos) {
+        if (isEmpty() || pos < 0 || pos >= numOfElements) {
+            throw new IndexOutOfBoundsException("Index must be between 0 and " + numOfElements + ". " +
+                    "(Supplied index was " + pos + ").");
+        }
+        Node current = first;
+        for (int i = 0; i < pos; i++) {
+            current = current.next;
+        }
+        return current.data;
+    }
+
     public static class Node {
         private User data;
         private Node next;
