@@ -95,6 +95,17 @@ public class PriorityQueue {
         numOfElements++;
     }
 
+    /**
+     * Retrieves the first element in the queue
+     * @return the found data
+     */
+    public Ticket peek(){
+        if (isEmpty()){
+            throw new IllegalArgumentException("Queue is empty");
+        }
+        return first.data;
+    }
+
     public static class Node {
         private Ticket data;
         private Node next;
