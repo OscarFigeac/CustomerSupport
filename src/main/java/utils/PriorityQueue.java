@@ -31,6 +31,23 @@ public class PriorityQueue {
         return numOfElements == 0;
     }
 
+    /**
+     * Takes in two parameters to be compared
+     * @param t1 The parameter being checked
+     * @param t2 The parameter being checked
+     * @return a negative integer if t1< t2; a positive integer if t1>t2 and zero if equal
+     * @throws IllegalArgumentException if any of the parameters is null
+     * @author Oscar Figeac
+     */
+    public int compare(Ticket t1, Ticket t2){
+        if (t1 == null || t2 == null){
+            throw new IllegalArgumentException("Passed parameter cannot be null");
+        }
+        return Integer.compare(t1.getPriorityLvl(), t2.getPriorityLvl());
+    }
+
+
+
     public static class Node {
         private Ticket data;
         private LinkedList.Node next;
