@@ -110,6 +110,18 @@ public class HashMap {
         return null;
     }
 
+    /**
+     * Checks if the key is present in the map
+     * @param key The username to be found
+     * @return true if the key exists and false if not
+     * @throws IllegalArgumentException if the key is null
+     */
+    public boolean containsKey(String key){
+        validateKey(key);
+
+        return get(key) != null;
+    }
+
     private int calculateSlot(String key) {
         // Convert key's data into number
         int hashCode = key.hashCode();
