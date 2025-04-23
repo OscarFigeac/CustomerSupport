@@ -57,6 +57,34 @@ public class HashMap {
         return null;
     }
 
+    /**
+     * Removes an entry from the map
+     * @param key The username of the user/agent to be deleted
+     * @return null if nothing was removed or the username of the user/agent removed
+     * @throws IllegalArgumentException if the key is null
+     */
+    public Integer remove(String key){
+        validateKey(key);
+
+        int destinationSlot = calculateSlot(key);
+
+        ArrayList<Entry> slotList = map[destinationSlot];
+        if(slotList == null){
+            return null;
+        }
+
+        for (int i = 0; i < slotList.size(); i++) {
+            Entry currentEntry = slotList.get(i);
+            if(currentEntry.key.equals(key)){
+                Integer oldValue = currentEntry.value;
+                slotList.remove(i);
+                count--;
+                return oldValue;
+            }
+        }
+        return null;
+    }
+
     private int calculateSlot(String key) {
         // Convert key's data into number
         int hashCode = key.hashCode();
