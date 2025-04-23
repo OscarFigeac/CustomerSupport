@@ -122,6 +122,42 @@ public class HashMap {
         return get(key) != null;
     }
 
+    /**
+     * Gives the amount of entries in the map
+     * @return returns the count
+     */
+    public int size(){
+        return count;
+    }
+
+    /**
+     * Finds all the keys in the hashmap
+     * @return Returns an array of strings containing the keys
+     */
+    public String[] getKeys(){
+        if(count == 0){
+            return new String[0];
+        }
+
+        String[] keys = new String[count];
+        int tracker = 0;
+
+        for (int i = 0; i < map.length; i++) {
+            if(map[i] != null) {
+                ArrayList<Entry> slotList = map[i];
+                for(int j = 0; j < slotList.size(); j++) {
+                    Entry currentEntry = slotList.get(j);
+                    keys[tracker] = currentEntry.key;
+                    tracker++;
+                }
+            }
+            if(tracker == count){
+                return keys;
+            }
+        }
+        return keys;
+    }
+
     private int calculateSlot(String key) {
         // Convert key's data into number
         int hashCode = key.hashCode();
