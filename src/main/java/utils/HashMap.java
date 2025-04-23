@@ -158,6 +158,33 @@ public class HashMap {
         return keys;
     }
 
+    /**
+     * Finds all the values in the hashmap
+     * @return Returns an array of ints containing the values
+     */
+    public int[] getValues(){
+        if(count == 0){
+            return new int[0];
+        }
+
+        int[] values = new int[count];
+        int tracker = 0;
+        for (int i = 0; i < map.length; i++) {
+            if(map[i] != null) {
+                ArrayList<Entry> slotList = map[i];
+                for(int j = 0; j < slotList.size(); j++) {
+                    Entry currentEntry = slotList.get(j);
+                    values[tracker] = currentEntry.value;
+                    tracker++;
+                }
+            }
+            if(tracker == count){
+                return values;
+            }
+        }
+        return values;
+    }
+
     private int calculateSlot(String key) {
         // Convert key's data into number
         int hashCode = key.hashCode();
