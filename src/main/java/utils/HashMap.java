@@ -85,6 +85,31 @@ public class HashMap {
         return null;
     }
 
+    /**
+     * finds the entry in the map
+     * @param key The username to be found
+     * @return null if the entry was not found and the value of the entry if it was
+     * @throws IllegalArgumentException if the key is null
+     */
+    public Integer get(String key){
+        validateKey(key);
+
+        int destinationSlot = calculateSlot(key);
+
+        if(map[destinationSlot] == null || map[destinationSlot].isEmpty()){
+            return null;
+        }
+
+        ArrayList<Entry> slotList = map[destinationSlot];
+        for (int i = 0; i < slotList.size(); i++) {
+            Entry currentEntry = slotList.get(i);
+            if(currentEntry.key.equals(key)){
+                return currentEntry.value;
+            }
+        }
+        return null;
+    }
+
     private int calculateSlot(String key) {
         // Convert key's data into number
         int hashCode = key.hashCode();
