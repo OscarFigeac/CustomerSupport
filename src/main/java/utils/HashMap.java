@@ -1,5 +1,7 @@
 package utils;
 
+import business.Agent;
+
 import java.util.ArrayList;
 
 public class HashMap {
@@ -12,26 +14,29 @@ public class HashMap {
         count = 0;
     }
 
-    //Key is the username
-    //Value is the
+    //Key is the agent username (Created automatically)
+    //Value is the Agent object
     private static class Entry{
         private String key;
-        private Integer value;
+        private Agent value;
 
-        public Entry(String key, Integer value){
-            this.key = key;
+        public Entry(Agent value){
+            if(value == null){
+                throw new IllegalArgumentException("The agent cannot be null");
+            }
+            this.key = value.getUsername();
             this.value = value;
         }
     }
 
     /**
      * Enters a value into the hashmap
-     * @param key The username of the user/agent
-     * @param value
-     * @return The key if it was present or null if nothing was found matching the key
+     * @param key The username of the agent
+     * @param value An agent object
+     * @return The value if the key was present or null if nothing was found matching the key
      * @throws IllegalArgumentException if the key is null
      */
-    public Integer put(String key, Integer value){
+    public Agent put(String key, Agent value){
         validateKey(key);
 
         int destinationSlot = calculateSlot(key);
@@ -44,13 +49,13 @@ public class HashMap {
         for (int i = 0; i < slotList.size(); i++) {
             Entry currentEntry = slotList.get(i);
             if(currentEntry.key.equals(key)){
-                Integer oldValue = currentEntry.value;
+                Agent oldValue = currentEntry.value;
                 currentEntry.value = value;
                 return oldValue;
             }
         }
 
-        Entry newEntry = new Entry(key, value);
+        Entry newEntry = new Entry(value);
         slotList.add(newEntry);
         count++;
 
@@ -59,11 +64,11 @@ public class HashMap {
 
     /**
      * Removes an entry from the map
-     * @param key The username of the user/agent to be deleted
-     * @return null if nothing was removed or the username of the user/agent removed
+     * @param key The username of the agent to be deleted
+     * @return null if nothing was removed or the agent if they were removed
      * @throws IllegalArgumentException if the key is null
      */
-    public Integer remove(String key){
+    public Agent remove(String key){
         validateKey(key);
 
         int destinationSlot = calculateSlot(key);
@@ -76,7 +81,7 @@ public class HashMap {
         for (int i = 0; i < slotList.size(); i++) {
             Entry currentEntry = slotList.get(i);
             if(currentEntry.key.equals(key)){
-                Integer oldValue = currentEntry.value;
+                Agent oldValue = currentEntry.value;
                 slotList.remove(i);
                 count--;
                 return oldValue;
@@ -91,7 +96,7 @@ public class HashMap {
      * @return null if the entry was not found and the value of the entry if it was
      * @throws IllegalArgumentException if the key is null
      */
-    public Integer get(String key){
+    public Agent get(String key){
         validateKey(key);
 
         int destinationSlot = calculateSlot(key);
@@ -160,14 +165,14 @@ public class HashMap {
 
     /**
      * Finds all the values in the hashmap
-     * @return Returns an array of ints containing the values
+     * @return Returns an array of Agents containing the values
      */
-    public int[] getValues(){
+    public Agent[] getValues(){
         if(count == 0){
-            return new int[0];
+            return new Agent[0];
         }
 
-        int[] values = new int[count];
+        Agent[] values = new Agent[count];
         int tracker = 0;
         for (int i = 0; i < map.length; i++) {
             if(map[i] != null) {
