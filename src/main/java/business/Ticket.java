@@ -3,7 +3,7 @@ package business;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
-public class Tickets {
+public class Ticket {
     //Attributes
     private String ticketId;
     private String issueDesc;
@@ -14,7 +14,7 @@ public class Tickets {
     private String status;
 
     //Constructors
-    public Tickets(String id, String desc, int priority, LocalDateTime createDate, String user, String agentID, String stat){
+    public Ticket(String id, String desc, int priority, LocalDateTime createDate, String user, String agentID, String stat){
         this.ticketId = id;
         this.issueDesc = desc;
         this.priorityLvl = priority;
@@ -79,7 +79,7 @@ public class Tickets {
     //equals()
     @Override
     public boolean equals(Object ob) {
-        if(!(ob instanceof Tickets t)){
+        if(!(ob instanceof Ticket t)){
             return false;
         }
 
