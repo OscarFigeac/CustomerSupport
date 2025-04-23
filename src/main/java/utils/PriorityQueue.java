@@ -98,12 +98,34 @@ public class PriorityQueue {
     /**
      * Retrieves the first element in the queue
      * @return the found data
+     * @throws IllegalArgumentException if the queue is empty
+     * @author Oscar Figeac
      */
     public Ticket peek(){
         if (isEmpty()){
             throw new IllegalArgumentException("Queue is empty");
         }
         return first.data;
+    }
+
+    /**
+     * Removes the first element in the queue and keeps the sorted order
+     * @return the removed element
+     * @author Oscar Figeac
+     */
+    public Ticket dequeue(){
+        if (isEmpty()){
+            return null;
+        }
+        Ticket lost = first.data;
+        first = first.next;
+        if (first != null){
+            first.prev = null;
+        } else{
+            last = null;
+        }
+        numOfElements--;
+        return lost;
     }
 
     public static class Node {
