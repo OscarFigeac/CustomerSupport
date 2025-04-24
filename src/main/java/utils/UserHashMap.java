@@ -1,13 +1,12 @@
 package utils;
+import business.User;
 
-import business.Agent;
-
-public class HashMap {
+public class UserHashMap {
     private static final int INITIAL_SIZE = 103;
     private DynamicArray[] map;
     private int count;
 
-    public HashMap(){
+    public UserHashMap(){
         map = new DynamicArray[INITIAL_SIZE];
         count = 0;
     }
@@ -16,12 +15,9 @@ public class HashMap {
     //Value is the Agent object
     public static class Entry{
         private String key;
-        private Agent value;
+        private User value;
 
-        public Entry(Agent value){
-            if(value == null){
-                throw new IllegalArgumentException("The agent cannot be null");
-            }
+        public Entry(User value){
             this.key = value.getUsername();
             this.value = value;
         }
@@ -35,7 +31,7 @@ public class HashMap {
      * @throws IllegalArgumentException if the key is null or empty
      * @author Tomasz Januszkiewicz
      */
-    public Agent put(String key, Agent value){
+    public User put(String key, User value){
         validateKey(key);
 
         int destinationSlot = calculateSlot(key);
@@ -48,7 +44,7 @@ public class HashMap {
         for (int i = 0; i < slotList.size(); i++) {
             Entry currentEntry = slotList.get(i);
             if(currentEntry.key.equals(key)){
-                Agent oldValue = currentEntry.value;
+                User oldValue = currentEntry.value;
                 currentEntry.value = value;
                 return oldValue;
             }
@@ -68,7 +64,7 @@ public class HashMap {
      * @throws IllegalArgumentException if the key is null or empty
      * @author Tomasz Januszkiewcz
      */
-    public Agent remove(String key){
+    public User remove(String key){
         validateKey(key);
 
         int destinationSlot = calculateSlot(key);
@@ -81,7 +77,7 @@ public class HashMap {
         for (int i = 0; i < slotList.size(); i++) {
             Entry currentEntry = slotList.get(i);
             if(currentEntry.key.equals(key)){
-                Agent oldValue = currentEntry.value;
+                User oldValue = currentEntry.value;
                 slotList.remove(i);
                 count--;
                 return oldValue;
@@ -97,7 +93,7 @@ public class HashMap {
      * @throws IllegalArgumentException if the key is null or empty
      * @author Tomasz Januszkiewicz
      */
-    public Agent get(String key){
+    public User get(String key){
         validateKey(key);
 
         int destinationSlot = calculateSlot(key);
@@ -172,12 +168,12 @@ public class HashMap {
      * @return Returns an array of Agents containing the values
      * @author Tomasz Januszkiewicz
      */
-    public Agent[] getValues(){
+    public User[] getValues(){
         if(count == 0){
-            return new Agent[0];
+            return new User[0];
         }
 
-        Agent[] values = new Agent[count];
+        User[] values = new User[count];
         int tracker = 0;
         for (int i = 0; i < map.length; i++) {
             if(map[i] != null) {
