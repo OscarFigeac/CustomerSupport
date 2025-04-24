@@ -45,6 +45,15 @@ public class DynamicArray {
         return -1;
     }
 
+    //Add w/o Position
+    public void add(String toBeAdded){
+        if(numElements == data.length){
+            grow();
+        }
+
+        data[numElements++] = toBeAdded;
+    }
+
 
     //Private Features:
     private void grow(){
