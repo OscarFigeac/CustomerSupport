@@ -31,6 +31,10 @@ public class Version1App {
 
 
         //Required authentication functionality
+        //Tomasz
+        User user = new User(null, null);
+        User agent = new Agent(null, null, null, null);
+
         if(!existingAccount){
             boolean end = false;
             while(!end) {
@@ -53,7 +57,7 @@ public class Version1App {
                     }
                     System.out.println("Enter a password");
                     String password = kb.nextLine();
-                    User user = new User(username, password);
+                    user = new User(username, password);
                     map.put(username, user);
 
                     end = true;
@@ -77,7 +81,7 @@ public class Version1App {
                     System.out.println("Enter your name");
                     String name = kb.nextLine();
                     String id = name.substring(0,2) + name.substring(username.length()/2, (username.length()/2)+2) + map.generateAgentNum();
-                    User user = new Agent(username, password, id, name);
+                    agent = new Agent(username, password, id, name);
                     map.put(username, user);
 
                     end = true;
@@ -86,6 +90,7 @@ public class Version1App {
                 }
             }
         }
+
             /*TODO: Users can log in if they provide valid credentials.
                 - They should not need to state if they are logging in as a User or an Agent.
             */
