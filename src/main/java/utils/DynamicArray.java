@@ -24,4 +24,15 @@ public class DynamicArray {
     public int size(){
         return data.length;
     }
+
+    //Get
+    public String get(int position){
+        if(position < 0 || position >= data.length){
+            throw new IndexOutOfBoundsException("Position entered is outside the boundaries of the dynamic array");
+        }
+
+        return data[position];
+    }
+
+
 }
