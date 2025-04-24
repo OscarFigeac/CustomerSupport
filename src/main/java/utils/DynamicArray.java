@@ -18,5 +18,10 @@ public class DynamicArray {
         data = new String[orgSize];
     }
 
+    //Features:
 
+    //Size
+    public int size(){
+        return data.length;
+    }
 }
