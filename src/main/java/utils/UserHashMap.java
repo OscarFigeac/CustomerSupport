@@ -5,10 +5,12 @@ public class UserHashMap {
     private static final int INITIAL_SIZE = 103;
     private DynamicArray[] map;
     private int count;
+    private int agentNum;
 
     public UserHashMap(){
         map = new DynamicArray[INITIAL_SIZE];
         count = 0;
+        agentNum = 1;
     }
 
     //Key is the agent username (Created automatically)
@@ -189,6 +191,16 @@ public class UserHashMap {
             }
         }
         return values;
+    }
+
+    /**
+     * Generates a new number for the agent's ID
+     * @return The agentNum variable
+     */
+    public int generateAgentNum(){
+        int output = agentNum;
+        agentNum++;
+        return output;
     }
 
     private int calculateSlot(String key) {
