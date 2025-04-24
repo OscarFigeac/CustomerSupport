@@ -32,7 +32,7 @@ public class HashMap {
      * @param key The username of the agent
      * @param value An agent object
      * @return The value if the key was present or null if nothing was found matching the key
-     * @throws IllegalArgumentException if the key is null
+     * @throws IllegalArgumentException if the key is null or empty
      * @author Tomasz Januszkiewicz
      */
     public Agent put(String key, Agent value){
@@ -65,7 +65,7 @@ public class HashMap {
      * Removes an entry from the map
      * @param key The username of the agent to be deleted
      * @return null if nothing was removed or the agent if they were removed
-     * @throws IllegalArgumentException if the key is null
+     * @throws IllegalArgumentException if the key is null or empty
      * @author Tomasz Januszkiewcz
      */
     public Agent remove(String key){
@@ -94,7 +94,7 @@ public class HashMap {
      * finds the entry in the map
      * @param key The username to be found
      * @return null if the entry was not found and the value of the entry if it was
-     * @throws IllegalArgumentException if the key is null
+     * @throws IllegalArgumentException if the key is null or empty
      * @author Tomasz Januszkiewicz
      */
     public Agent get(String key){
@@ -120,7 +120,7 @@ public class HashMap {
      * Checks if the key is present in the map
      * @param key The username to be found
      * @return true if the key exists and false if not
-     * @throws IllegalArgumentException if the key is null
+     * @throws IllegalArgumentException if the key is null or empty
      * @author Tomasz Januszkiewicz
      */
     public boolean containsKey(String key){
@@ -207,7 +207,10 @@ public class HashMap {
 
     private static void validateKey(String key) {
         if(key == null){
-            throw new IllegalArgumentException("Key cannot be null");
+            throw new IllegalArgumentException("Username cannot be null");
+        }
+        if(key.isEmpty()){
+            throw new IllegalArgumentException("Username cannot be empty");
         }
     }
 }
