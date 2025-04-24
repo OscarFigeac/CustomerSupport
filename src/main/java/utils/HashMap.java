@@ -35,6 +35,7 @@ public class HashMap {
      * @param value An agent object
      * @return The value if the key was present or null if nothing was found matching the key
      * @throws IllegalArgumentException if the key is null
+     * @author Tomasz Januszkiewicz
      */
     public Agent put(String key, Agent value){
         validateKey(key);
@@ -67,6 +68,7 @@ public class HashMap {
      * @param key The username of the agent to be deleted
      * @return null if nothing was removed or the agent if they were removed
      * @throws IllegalArgumentException if the key is null
+     * @author Tomasz Januszkiewcz
      */
     public Agent remove(String key){
         validateKey(key);
@@ -95,6 +97,7 @@ public class HashMap {
      * @param key The username to be found
      * @return null if the entry was not found and the value of the entry if it was
      * @throws IllegalArgumentException if the key is null
+     * @author Tomasz Januszkiewicz
      */
     public Agent get(String key){
         validateKey(key);
@@ -120,6 +123,7 @@ public class HashMap {
      * @param key The username to be found
      * @return true if the key exists and false if not
      * @throws IllegalArgumentException if the key is null
+     * @author Tomasz Januszkiewicz
      */
     public boolean containsKey(String key){
         validateKey(key);
@@ -130,6 +134,7 @@ public class HashMap {
     /**
      * Gives the amount of entries in the map
      * @return returns the count
+     * @author Tomasz Januszkiewicz
      */
     public int size(){
         return count;
@@ -138,6 +143,7 @@ public class HashMap {
     /**
      * Finds all the keys in the hashmap
      * @return Returns an array of strings containing the keys
+     * @author Tomasz Januszkiewicz
      */
     public String[] getKeys(){
         if(count == 0){
@@ -166,6 +172,7 @@ public class HashMap {
     /**
      * Finds all the values in the hashmap
      * @return Returns an array of Agents containing the values
+     * @author Tomasz Januszkiewicz
      */
     public Agent[] getValues(){
         if(count == 0){
