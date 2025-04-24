@@ -44,4 +44,14 @@ public class DynamicArray {
 
         return -1;
     }
+
+
+    //Private Features:
+    private void grow(){
+        String [] expandedArray = new String [data.length * RESIZE_FACTOR];
+
+        System.arraycopy(data, 0, expandedArray, 0, data.length);
+
+        data=expandedArray;
+    }
 }
