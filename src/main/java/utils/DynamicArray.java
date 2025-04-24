@@ -54,6 +54,23 @@ public class DynamicArray {
         data[numElements++] = toBeAdded;
     }
 
+    //Add w/ Position
+    public void add(String toBeAdded, int positionToInsert){
+        if(positionToInsert < 0 || positionToInsert >= numElements){
+            throw new IndexOutOfBoundsException("String cannot be added to this position as it is outside the boundaries of the array");
+        }
+        if(numElements == data.length){
+            grow();
+        }
+
+        for (int i = data.length-1; i > positionToInsert; i--) {
+            data[i] = data[i-1];
+        }
+
+        data[positionToInsert] = toBeAdded;
+        numElements++;
+    }
+
 
     //Private Features:
     private void grow(){
