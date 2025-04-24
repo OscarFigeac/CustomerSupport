@@ -16,7 +16,7 @@ public class HashMap {
 
     //Key is the agent username (Created automatically)
     //Value is the Agent object
-    private static class Entry{
+    public static class Entry{
         private String key;
         private Agent value;
 
