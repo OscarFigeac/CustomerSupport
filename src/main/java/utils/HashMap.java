@@ -2,15 +2,13 @@ package utils;
 
 import business.Agent;
 
-import java.util.ArrayList;
-
 public class HashMap {
     private static final int INITIAL_SIZE = 103;
-    private ArrayList<Entry>[] map;
+    private DynamicArray[] map;
     private int count;
 
     public HashMap(){
-        map = new ArrayList[INITIAL_SIZE];
+        map = new DynamicArray[INITIAL_SIZE];
         count = 0;
     }
 
@@ -43,10 +41,10 @@ public class HashMap {
         int destinationSlot = calculateSlot(key);
 
         if(map[destinationSlot] == null){
-            map[destinationSlot] = new ArrayList<Entry>();
+            map[destinationSlot] = new DynamicArray();
         }
 
-        ArrayList<Entry> slotList = map[destinationSlot];
+        DynamicArray slotList = map[destinationSlot];
         for (int i = 0; i < slotList.size(); i++) {
             Entry currentEntry = slotList.get(i);
             if(currentEntry.key.equals(key)){
@@ -75,7 +73,7 @@ public class HashMap {
 
         int destinationSlot = calculateSlot(key);
 
-        ArrayList<Entry> slotList = map[destinationSlot];
+        DynamicArray slotList = map[destinationSlot];
         if(slotList == null){
             return null;
         }
@@ -108,7 +106,7 @@ public class HashMap {
             return null;
         }
 
-        ArrayList<Entry> slotList = map[destinationSlot];
+        DynamicArray slotList = map[destinationSlot];
         for (int i = 0; i < slotList.size(); i++) {
             Entry currentEntry = slotList.get(i);
             if(currentEntry.key.equals(key)){
@@ -155,7 +153,7 @@ public class HashMap {
 
         for (int i = 0; i < map.length; i++) {
             if(map[i] != null) {
-                ArrayList<Entry> slotList = map[i];
+                DynamicArray slotList = map[i];
                 for(int j = 0; j < slotList.size(); j++) {
                     Entry currentEntry = slotList.get(j);
                     keys[tracker] = currentEntry.key;
@@ -183,7 +181,7 @@ public class HashMap {
         int tracker = 0;
         for (int i = 0; i < map.length; i++) {
             if(map[i] != null) {
-                ArrayList<Entry> slotList = map[i];
+                DynamicArray slotList = map[i];
                 for(int j = 0; j < slotList.size(); j++) {
                     Entry currentEntry = slotList.get(j);
                     values[tracker] = currentEntry.value;
