@@ -34,5 +34,14 @@ public class DynamicArray {
         return data[position];
     }
 
+    //IndexOf
+    public int indexOf(String searchingFor){
+        for (int i = 0; i < numElements; i++) {
+            if(searchingFor.equalsIgnoreCase(data[i])){
+                return i;
+            }
+        }
 
+        return -1;
+    }
 }
