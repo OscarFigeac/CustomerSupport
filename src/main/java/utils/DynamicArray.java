@@ -21,11 +21,29 @@ public class DynamicArray {
     //Features:
 
     //Size
+    /**
+     * Method returns the size of the Dynamic Array for the user
+     *
+     * @return Dynamic Array size as an Integer
+     *
+     * @author Eoghan Carroll
+     */
     public int size(){
         return data.length;
     }
 
     //Get
+    /**
+     * Method to return the element at a position entered by the user in the Dynamic Array
+     *
+     * @param position Integer entered by the user as a position
+     *
+     * @return Element at the position entered by the user
+     *
+     * @throws IndexOutOfBoundsException If the position is less than zero or larger than the array size
+     *
+     * @author Eoghan Carroll
+     */
     public String get(int position){
         if(position < 0 || position >= data.length){
             throw new IndexOutOfBoundsException("Position entered is outside the boundaries of the dynamic array");
@@ -35,6 +53,15 @@ public class DynamicArray {
     }
 
     //IndexOf
+    /**
+     * Method to return the index of a element entered by the user in the Dynamic Array
+     *
+     * @param searchingFor Element entered by the user to search for
+     *
+     * @return The index of the Element entered by the user or -1 if the Element is not found
+     *
+     * @author Eoghan Carroll
+     */
     public int indexOf(String searchingFor){
         for (int i = 0; i < numElements; i++) {
             if(searchingFor.equalsIgnoreCase(data[i])){
@@ -46,6 +73,13 @@ public class DynamicArray {
     }
 
     //Add w/o Position
+    /**
+     *Method to add a new element to the end of the Dynamic Array
+     *
+     * @param toBeAdded Element entered by the user to add to the array
+     *
+     * @author Eoghan Carroll
+     */
     public void add(String toBeAdded){
         if(numElements == data.length){
             grow();
@@ -55,6 +89,18 @@ public class DynamicArray {
     }
 
     //Add w/ Position
+    /**
+     * Method to add a new element to the Array at a specified location
+     * <p>
+     * Method takes a string and integer from the user, the String is added to the dynamic array and the integer (after validation) is the index at which it's added
+     *
+     * @param toBeAdded String to be added to the Dynamic Array
+     * @param positionToInsert Index at which to add the String
+     *
+     * @throws IndexOutOfBoundsException If the position entered is less than 0 or greater than the array size
+     *
+     * @author Eoghan Carroll
+     */
     public void add(String toBeAdded, int positionToInsert){
         if(positionToInsert < 0 || positionToInsert >= numElements){
             throw new IndexOutOfBoundsException("String cannot be added to this position as it is outside the boundaries of the array");
@@ -72,6 +118,20 @@ public class DynamicArray {
     }
 
     //Set
+    /**
+     * Method to replace one element for another
+     * <p>
+     * Takes an Element and Integer from the user. The Element will be swapped with the Element found at the index specified by the Integer that was entered and the old Element is returned
+     *
+     * @param toBeAdded Element to be added to the Array
+     * @param positionToInsert Index to insert the new Element
+     *
+     * @return Element that was replaced by toBeAdded
+     *
+     * @throws IndexOutOfBoundsException If the position is greater than the size of the array or less than 0
+     *
+     * @author Eoghan Carroll
+     */
     public String set(String toBeAdded, int positionToInsert){
         if(positionToInsert >= data.length || positionToInsert < 0){
             throw new IndexOutOfBoundsException("Position entered is outside the boundaries of the dynamic array");
@@ -85,6 +145,17 @@ public class DynamicArray {
     }
 
     //Remove
+    /**
+     * Method to delete a single element from the Dynamic Array at a specified index
+     *
+     * @param positionToRemove Index at which will be deleted from the array
+     *
+     * @return Element that was deleted from the Dynamic Array
+     *
+     * @throws IndexOutOfBoundsException If the position is less than 0 or greater than the array size
+     *
+     * @author Eoghan Carroll
+     */
     public String remove(int positionToRemove){
         if(positionToRemove < 0 || positionToRemove >= numElements){
             throw new IndexOutOfBoundsException("Position entered is outside the boundaries of the dynamic array");
@@ -100,12 +171,25 @@ public class DynamicArray {
     }
 
     //isEmpty
+    /**
+     *Method that informs the user if the Array is empty or not
+     *
+     * @return True if the Array is empty, False if not
+     *
+     * @author Eoghan Carroll
+     */
     public boolean isEmpty(){
         return numElements == 0;
     }
 
 
     //Private Features:
+
+    /**
+     * Method to expand the size of the Array if it's found to be full
+     *
+     * @author Eoghan Carroll
+     */
     private void grow(){
         String [] expandedArray = new String [data.length * RESIZE_FACTOR];
 
