@@ -53,7 +53,7 @@ public class Version1App {
                         if(username.length() < 5){
                             System.out.println("The username must contain at least 5 characters");
                         }else if(map.containsKey(username)){
-                            System.out.println("Username is taken");
+                            System.out.println("Invalid username");
                         }else{
                             usernameExists = false;
                         }
@@ -74,7 +74,7 @@ public class Version1App {
                         if(username.length() < 5){
                             System.out.println("The username must contain at least 5 characters");
                         }else if(map.containsKey(username)){
-                            System.out.println("Username is taken");
+                            System.out.println("Invalid username");
                         }else{
                             usernameExists = false;
                         }
