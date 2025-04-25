@@ -70,7 +70,65 @@ class PriorityQueueTest {
     }
 
     @Test
-    void enqueue() {
+    void enqueue_Null() {
+        PriorityQueue test = new PriorityQueue();
+        assertThrows(IllegalArgumentException.class, () -> test.enqueue(null), "Should throw an exception");
+    }
+
+    @Test
+    void enqueue_EmptyQueue(){
+        PriorityQueue test = new PriorityQueue();
+        Ticket ticket = new Ticket("123", "Test", 1, LocalDateTime.now(), "Oscar", "o123", "Stalled");
+        test.enqueue(ticket);
+        assertEquals(1, test.size());
+    }
+
+    @Test
+    void enqueue_HigherPriorityFirst(){
+        PriorityQueue test = new PriorityQueue();
+        Ticket ticket = new Ticket("123", "Test", 5, LocalDateTime.now(), "Oscar", "o123", "Stalled");
+        Ticket ticket2 = new Ticket("123", "Test", 1, LocalDateTime.now(), "Oscar", "o123", "Stalled");
+        test.enqueue(ticket);
+        test.enqueue(ticket2);
+        assertEquals(2, test.size());
+        System.out.println(test.peek().getPriorityLvl());
+    }
+
+    @Test
+    void enqueue_LowerPriorityFirst(){
+        PriorityQueue test = new PriorityQueue();
+        Ticket ticket = new Ticket("123", "Test", 1, LocalDateTime.now(), "Oscar", "o123", "Stalled");
+        Ticket ticket2 = new Ticket("123", "Test", 5, LocalDateTime.now(), "Oscar", "o123", "Stalled");
+        test.enqueue(ticket);
+        test.enqueue(ticket2);
+        assertEquals(2, test.size());
+        System.out.println(test.peek().getPriorityLvl());
+    }
+
+    @Test
+    void enqueue_MultipleElements(){
+        PriorityQueue test = new PriorityQueue();
+        Ticket ticket = new Ticket("123", "Test", 1, LocalDateTime.now(), "Oscar", "o123", "Stalled");
+        Ticket ticket2 = new Ticket("123", "Test", 3, LocalDateTime.now(), "Oscar", "o123", "Stalled");
+        Ticket ticket3 = new Ticket("123", "Test", 2, LocalDateTime.now(), "Oscar", "o123", "Stalled");
+        test.enqueue(ticket);
+        test.enqueue(ticket2);
+        test.enqueue(ticket3);
+        assertEquals(3, test.size());
+        System.out.println(test.peek().getPriorityLvl());
+    }
+
+    @Test
+    void enqueue_SamePriority(){
+        PriorityQueue test = new PriorityQueue();
+        Ticket ticket = new Ticket("123", "Test", 3, LocalDateTime.now(), "Oscar", "o123", "Stalled");
+        Ticket ticket2 = new Ticket("123", "Test", 3, LocalDateTime.now(), "Oscar", "o123", "Stalled");
+        Ticket ticket3 = new Ticket("123", "Test", 3, LocalDateTime.now(), "Oscar", "o123", "Stalled");
+        test.enqueue(ticket);
+        test.enqueue(ticket2);
+        test.enqueue(ticket3);
+        assertEquals(3, test.size());
+        System.out.println(test.peek().getPriorityLvl());
     }
 
     @Test
