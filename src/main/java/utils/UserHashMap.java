@@ -1,29 +1,25 @@
 package utils;
+import business.User;
 
-import business.Agent;
-
-import java.util.ArrayList;
-
-public class HashMap {
+public class UserHashMap {
     private static final int INITIAL_SIZE = 103;
-    private ArrayList<Entry>[] map;
+    private DynamicArray[] map;
     private int count;
+    private int agentNum;
 
-    public HashMap(){
-        map = new ArrayList[INITIAL_SIZE];
+    public UserHashMap(){
+        map = new DynamicArray[INITIAL_SIZE];
         count = 0;
+        agentNum = 1;
     }
 
     //Key is the agent username (Created automatically)
     //Value is the Agent object
-    private static class Entry{
+    public static class Entry{
         private String key;
-        private Agent value;
+        private User value;
 
-        public Entry(Agent value){
-            if(value == null){
-                throw new IllegalArgumentException("The agent cannot be null");
-            }
+        public Entry(User value){
             this.key = value.getUsername();
             this.value = value;
         }
@@ -34,23 +30,23 @@ public class HashMap {
      * @param key The username of the agent
      * @param value An agent object
      * @return The value if the key was present or null if nothing was found matching the key
-     * @throws IllegalArgumentException if the key is null
+     * @throws IllegalArgumentException if the key is null or empty
      * @author Tomasz Januszkiewicz
      */
-    public Agent put(String key, Agent value){
+    public User put(String key, User value){
         validateKey(key);
 
         int destinationSlot = calculateSlot(key);
 
         if(map[destinationSlot] == null){
-            map[destinationSlot] = new ArrayList<Entry>();
+            map[destinationSlot] = new DynamicArray();
         }
 
-        ArrayList<Entry> slotList = map[destinationSlot];
+        DynamicArray slotList = map[destinationSlot];
         for (int i = 0; i < slotList.size(); i++) {
             Entry currentEntry = slotList.get(i);
             if(currentEntry.key.equals(key)){
-                Agent oldValue = currentEntry.value;
+                User oldValue = currentEntry.value;
                 currentEntry.value = value;
                 return oldValue;
             }
@@ -67,15 +63,15 @@ public class HashMap {
      * Removes an entry from the map
      * @param key The username of the agent to be deleted
      * @return null if nothing was removed or the agent if they were removed
-     * @throws IllegalArgumentException if the key is null
+     * @throws IllegalArgumentException if the key is null or empty
      * @author Tomasz Januszkiewcz
      */
-    public Agent remove(String key){
+    public User remove(String key){
         validateKey(key);
 
         int destinationSlot = calculateSlot(key);
 
-        ArrayList<Entry> slotList = map[destinationSlot];
+        DynamicArray slotList = map[destinationSlot];
         if(slotList == null){
             return null;
         }
@@ -83,7 +79,7 @@ public class HashMap {
         for (int i = 0; i < slotList.size(); i++) {
             Entry currentEntry = slotList.get(i);
             if(currentEntry.key.equals(key)){
-                Agent oldValue = currentEntry.value;
+                User oldValue = currentEntry.value;
                 slotList.remove(i);
                 count--;
                 return oldValue;
@@ -96,10 +92,10 @@ public class HashMap {
      * finds the entry in the map
      * @param key The username to be found
      * @return null if the entry was not found and the value of the entry if it was
-     * @throws IllegalArgumentException if the key is null
+     * @throws IllegalArgumentException if the key is null or empty
      * @author Tomasz Januszkiewicz
      */
-    public Agent get(String key){
+    public User get(String key){
         validateKey(key);
 
         int destinationSlot = calculateSlot(key);
@@ -108,7 +104,7 @@ public class HashMap {
             return null;
         }
 
-        ArrayList<Entry> slotList = map[destinationSlot];
+        DynamicArray slotList = map[destinationSlot];
         for (int i = 0; i < slotList.size(); i++) {
             Entry currentEntry = slotList.get(i);
             if(currentEntry.key.equals(key)){
@@ -122,7 +118,7 @@ public class HashMap {
      * Checks if the key is present in the map
      * @param key The username to be found
      * @return true if the key exists and false if not
-     * @throws IllegalArgumentException if the key is null
+     * @throws IllegalArgumentException if the key is null or empty
      * @author Tomasz Januszkiewicz
      */
     public boolean containsKey(String key){
@@ -155,7 +151,7 @@ public class HashMap {
 
         for (int i = 0; i < map.length; i++) {
             if(map[i] != null) {
-                ArrayList<Entry> slotList = map[i];
+                DynamicArray slotList = map[i];
                 for(int j = 0; j < slotList.size(); j++) {
                     Entry currentEntry = slotList.get(j);
                     keys[tracker] = currentEntry.key;
@@ -174,16 +170,16 @@ public class HashMap {
      * @return Returns an array of Agents containing the values
      * @author Tomasz Januszkiewicz
      */
-    public Agent[] getValues(){
+    public User[] getValues(){
         if(count == 0){
-            return new Agent[0];
+            return new User[0];
         }
 
-        Agent[] values = new Agent[count];
+        User[] values = new User[count];
         int tracker = 0;
         for (int i = 0; i < map.length; i++) {
             if(map[i] != null) {
-                ArrayList<Entry> slotList = map[i];
+                DynamicArray slotList = map[i];
                 for(int j = 0; j < slotList.size(); j++) {
                     Entry currentEntry = slotList.get(j);
                     values[tracker] = currentEntry.value;
@@ -195,6 +191,16 @@ public class HashMap {
             }
         }
         return values;
+    }
+
+    /**
+     * Generates a new number for the agent's ID
+     * @return The agentNum variable
+     */
+    public int generateAgentNum(){
+        int output = agentNum;
+        agentNum++;
+        return output;
     }
 
     private int calculateSlot(String key) {
@@ -209,7 +215,10 @@ public class HashMap {
 
     private static void validateKey(String key) {
         if(key == null){
-            throw new IllegalArgumentException("Key cannot be null");
+            throw new IllegalArgumentException("Username cannot be null");
+        }
+        if(key.isEmpty()){
+            throw new IllegalArgumentException("Username cannot be empty");
         }
     }
 }
