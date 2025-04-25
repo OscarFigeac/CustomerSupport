@@ -217,7 +217,13 @@ public class Version1App {
                     case 5:
                         break;
                     case 6:
-                        break;
+                        kb.nextLine();
+                        System.out.println("Are you sure you want to log out?");
+                        System.out.println("Y/N");
+                        String logout = kb.nextLine();
+                        if(logout.equalsIgnoreCase("Y")){
+                            end = true;
+                        }
                 }
             }
         }
