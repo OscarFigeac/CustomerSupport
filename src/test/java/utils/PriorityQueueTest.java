@@ -132,7 +132,21 @@ class PriorityQueueTest {
     }
 
     @Test
-    void peek() {
+    void peek_Empty(){
+        PriorityQueue test = new PriorityQueue();
+        assertThrows(IllegalArgumentException.class, () -> test.peek(), "Should throw an exception");
+    }
+
+    @Test
+    void peek_Populated() {
+        PriorityQueue test = new PriorityQueue();
+        Ticket ticket = new Ticket("123", "Test", 3, LocalDateTime.now(), "Oscar", "o123", "Stalled");
+        Ticket ticket2 = new Ticket("123", "Test", 1, LocalDateTime.now(), "Oscar", "o123", "Stalled");
+        Ticket ticket3 = new Ticket("123", "Test", 3, LocalDateTime.now(), "Oscar", "o123", "Stalled");
+        test.enqueue(ticket);
+        test.enqueue(ticket2);
+        test.enqueue(ticket3);
+        assertEquals(ticket2, test.peek(), "Highest rated should be first");
     }
 
     @Test
