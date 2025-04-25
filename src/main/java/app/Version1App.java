@@ -199,12 +199,6 @@ public class Version1App {
                 }
             }
         }
-            //Required Agent ticket-handling functionality (in addition to the standard user functionality listed above):
-                //TODO: View the details of one of their assigned tickets
-                /*TODO: Change the status on one of their assigned tickets.
-                - Tickets with a solved/closed status should be removed from the Agent’s collection of open tickets
-                    and moved to their collection of closed tickets.
-                */
         if (userType == 'a') {
             boolean end = false;
 
