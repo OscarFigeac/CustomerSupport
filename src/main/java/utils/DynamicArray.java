@@ -31,7 +31,7 @@ public class DynamicArray {
      * @author Eoghan Carroll
      */
     public int size(){
-        return data.length;
+        return numElements;
     }
 
     //Get
