@@ -59,6 +59,37 @@ public class Version1App {
             map.put(inputUser.getUsername(), inputUser);
         }
 
+        //Reading all the Ticket data
+        File ticketData = new File("src/main/java/data/TicketData");
+        fileInput = new Scanner(ticketData);
+        while(fileInput.hasNextLine()){
+            String ticketID = fileInput.nextLine();
+            ticketID = ticketID.substring(ticketID.indexOf("(" )+1, ticketID.indexOf(")"));
+
+            String issueDesc = fileInput.nextLine();
+            issueDesc = issueDesc.substring(issueDesc.indexOf("(")+1, issueDesc.indexOf(")"));
+
+            String tempPriority = fileInput.nextLine();
+            tempPriority = tempPriority.substring(tempPriority.indexOf("(")+1, tempPriority.indexOf(")"));
+            int priority = Integer.parseInt(tempPriority);
+
+            String tempcreation = fileInput.nextLine();
+            tempcreation = tempcreation.substring(tempcreation.indexOf("(")+1, tempcreation.indexOf(")"));
+            LocalDateTime creation = LocalDateTime.parse(tempcreation);
+
+            String username = fileInput.nextLine();
+            username = username.substring(username.indexOf("(")+1, username.indexOf(")"));
+
+            String agentId = fileInput.nextLine();
+            agentId = agentId.substring(agentId.indexOf("(")+1, agentId.indexOf(")"));
+
+            String status = fileInput.nextLine();
+            status = status.substring(status.indexOf("(")+1, status.indexOf(")"));
+
+            Ticket inputTicket = new Ticket(ticketID, issueDesc, priority, creation, username, agentId, status);
+            tickets.enqueue(inputTicket);
+        }
+
         //Welcome screen - Tomasz Januszkiewicz
         System.out.println("Welcome!");
         boolean checkIfExists = true;
