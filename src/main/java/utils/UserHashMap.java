@@ -54,6 +54,10 @@ public class UserHashMap {
 
         if(map[destinationSlot] == null){
             map[destinationSlot] = new DynamicArray();
+            Entry newEntry = new Entry(value);
+            map[destinationSlot].add(newEntry);
+            count++;
+            return newEntry.value;
         }
 
         DynamicArray slotList = map[destinationSlot];
