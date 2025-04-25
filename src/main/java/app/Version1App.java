@@ -9,8 +9,6 @@ import utils.PriorityQueue;
 import utils.UserHashMap;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Scanner;
@@ -221,7 +219,8 @@ public class Version1App {
             }
             else{
                 if(map.get(username) instanceof Agent) {
-                    currentAgent = new Agent(username, password, ((Agent) map.get(username)).getAgentID(), ((Agent) map.get(username)).getAgentName());
+                    Agent entry = (Agent) map.get(username);
+                    currentAgent = new Agent(username, password, entry.getAgentID(), entry.getAgentName());
                     System.out.println("Welcome " + currentAgent.getAgentName());
                     retryLogin = false;
                     userType = 'a';
