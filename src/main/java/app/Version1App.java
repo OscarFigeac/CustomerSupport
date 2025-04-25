@@ -3,6 +3,7 @@ package app;
 import business.Agent;
 import business.Ticket;
 import business.User;
+import utils.LinkedList;
 import utils.PriorityQueue;
 import utils.UserHashMap;
 
@@ -13,6 +14,7 @@ public class Version1App {
     public static void main(String[] args) {
         UserHashMap map = new UserHashMap();
         PriorityQueue tickets = new PriorityQueue();
+        LinkedList t = new LinkedList();
 
         Scanner kb = new Scanner(System.in);
 
@@ -206,6 +208,25 @@ public class Version1App {
                 int option = kb.nextInt();
                 switch (option){
                     case 1:
+                        System.out.println("\n Looking for unassigned open tickets");
+                        boolean found = false;
+                        PriorityQueue tempQueue = new PriorityQueue(); //Created to iterate without risk of losing order
+
+                        while(!tickets.isEmpty()){
+                            Ticket ticket = tickets.dequeue();
+                            if (ticket.getAgentId() == null && !ticket.getStatus().equalsIgnoreCase("Solved")){
+                                System.out.println(ticket);
+                                found = true;
+                            }
+                            tempQueue.enqueue(ticket);
+                        }
+                        //Add everything back on to keep the order
+                        while(!tempQueue.isEmpty()){
+                            tickets.enqueue(tempQueue.dequeue());
+                        }
+                        if (!found){
+                            System.out.println("No tickets were found");
+                        }
                         break;
                     case 2:
                         break;
