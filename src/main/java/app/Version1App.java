@@ -7,15 +7,88 @@ import utils.LinkedList;
 import utils.PriorityQueue;
 import utils.UserHashMap;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Version1App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         UserHashMap map = new UserHashMap();
         PriorityQueue tickets = new PriorityQueue();
 
         Scanner kb = new Scanner(System.in);
+
+        //Reading all the Agent data
+        File agents = new File("src/main/java/data/AgentData");
+        Scanner fileInput = new Scanner(agents);
+        int agentCount = 0;
+        while(fileInput.hasNextLine()){
+            String username = fileInput.nextLine();
+            username = username.substring(username.indexOf("(" )+1, username.indexOf(")"));
+
+            String password = fileInput.nextLine();
+            password = password.substring(password.indexOf("(")+1, password.indexOf(")"));
+
+            String agentID = fileInput.nextLine();
+            agentID = agentID.substring(agentID.indexOf("(")+1, agentID.indexOf(")"));
+
+            String agentName = fileInput.nextLine();
+            agentName = agentName.substring(agentName.indexOf("(")+1, agentName.indexOf(")"));
+
+            Agent inputAgent = new Agent(username, password, agentID, agentName);
+            String number = agentID.substring(4);
+            int tempNum = Integer.parseInt(number);
+            if(tempNum > agentCount) {
+                agentCount = Integer.parseInt(number);
+            }
+            map.put(inputAgent.getUsername(), inputAgent);
+        }
+
+        //Reading all the User data
+        File users = new File("src/main/java/data/UserData");
+        fileInput = new Scanner(users);
+        while(fileInput.hasNextLine()){
+            String username = fileInput.nextLine();
+            username = username.substring(username.indexOf("(" )+1, username.indexOf(")"));
+
+            String password = fileInput.nextLine();
+            password = password.substring(password.indexOf("(")+1, password.indexOf(")"));
+
+            User inputUser = new User(username, password);
+            map.put(inputUser.getUsername(), inputUser);
+        }
+
+        //Reading all the Ticket data
+        File ticketData = new File("src/main/java/data/TicketData");
+        fileInput = new Scanner(ticketData);
+        while(fileInput.hasNextLine()){
+            String ticketID = fileInput.nextLine();
+            ticketID = ticketID.substring(ticketID.indexOf("(" )+1, ticketID.indexOf(")"));
+
+            String issueDesc = fileInput.nextLine();
+            issueDesc = issueDesc.substring(issueDesc.indexOf("(")+1, issueDesc.indexOf(")"));
+
+            String tempPriority = fileInput.nextLine();
+            tempPriority = tempPriority.substring(tempPriority.indexOf("(")+1, tempPriority.indexOf(")"));
+            int priority = Integer.parseInt(tempPriority);
+
+            String tempcreation = fileInput.nextLine();
+            tempcreation = tempcreation.substring(tempcreation.indexOf("(")+1, tempcreation.indexOf(")"));
+            LocalDateTime creation = LocalDateTime.parse(tempcreation);
+
+            String username = fileInput.nextLine();
+            username = username.substring(username.indexOf("(")+1, username.indexOf(")"));
+
+            String agentId = fileInput.nextLine();
+            agentId = agentId.substring(agentId.indexOf("(")+1, agentId.indexOf(")"));
+
+            String status = fileInput.nextLine();
+            status = status.substring(status.indexOf("(")+1, status.indexOf(")"));
+
+            Ticket inputTicket = new Ticket(ticketID, issueDesc, priority, creation, username, agentId, status);
+            tickets.enqueue(inputTicket);
+        }
 
         //Welcome screen - Tomasz Januszkiewicz
         System.out.println("Welcome!");
@@ -84,7 +157,12 @@ public class Version1App {
                     String password = kb.nextLine();
                     System.out.println("Enter your name");
                     String name = kb.nextLine();
-                    String id = name.substring(0,2) + username.substring(0,2) + map.generateAgentNum();
+                    String id = name.substring(0,2).toUpperCase() + username.substring(0,2).toUpperCase();
+                    if(agentCount==0){
+                        id = id + map.generateAgentNum();
+                    }else{
+                        id = id + map.generateAgentNum() + agentCount;
+                    }
                     Agent agent = new Agent(username, password, id, name);
                     map.put(username, agent);
 

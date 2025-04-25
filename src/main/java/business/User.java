@@ -59,7 +59,7 @@ public class User {
 
     /**
      * Checks if two users are the same
-     * (Users are equal if the usernames are the same)
+     * (UserData are equal if the usernames are the same)
      * @param o Username being checked
      * @return Returns true if the users are equal and false if not
      * @author Tommasz Januszkiewicz
@@ -76,5 +76,10 @@ public class User {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString(){
+        return "User: " + username + " password: " + password;
     }
 }
