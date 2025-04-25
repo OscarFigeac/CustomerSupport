@@ -89,8 +89,10 @@ public class Version1App {
             String status = fileInput.nextLine();
             status = status.substring(status.indexOf("(")+1, status.indexOf(")"));
 
-            Ticket inputTicket = new Ticket(ticketID, issueDesc, priority, creation, username, agentId, status);
-            tickets.enqueue(inputTicket);
+            if(!status.equalsIgnoreCase("Solved")) {
+                Ticket inputTicket = new Ticket(ticketID, issueDesc, priority, creation, username, agentId, status);
+                tickets.enqueue(inputTicket);
+            }
 
             String number = ticketID.substring(3);
             int tempNum = Integer.parseInt(number);
