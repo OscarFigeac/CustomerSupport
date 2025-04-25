@@ -1,10 +1,12 @@
 package utils;
 
+import com.sun.net.httpserver.Authenticator;
+
 public class DynamicArray {
     private final int RESIZE_FACTOR = 2;
 
     private int numElements;
-    private String[] data;
+    private UserHashMap.Entry[] data;
 
     //Constructors
     public DynamicArray(){
@@ -15,7 +17,7 @@ public class DynamicArray {
             throw new IllegalArgumentException("The array size is too small");
         }
 
-        data = new String[orgSize];
+        data = new UserHashMap.Entry[orgSize];
     }
 
     //Features:
@@ -44,7 +46,7 @@ public class DynamicArray {
      *
      * @author Eoghan Carroll
      */
-    public String get(int position){
+    public UserHashMap.Entry get(int position){
         if(position < 0 || position >= data.length){
             throw new IndexOutOfBoundsException("Position entered is outside the boundaries of the dynamic array");
         }
@@ -62,9 +64,9 @@ public class DynamicArray {
      *
      * @author Eoghan Carroll
      */
-    public int indexOf(String searchingFor){
+    public int indexOf(UserHashMap.Entry searchingFor){
         for (int i = 0; i < numElements; i++) {
-            if(searchingFor.equalsIgnoreCase(data[i])){
+            if(searchingFor.equals(data[i])){
                 return i;
             }
         }
@@ -80,7 +82,7 @@ public class DynamicArray {
      *
      * @author Eoghan Carroll
      */
-    public void add(String toBeAdded){
+    public void add(UserHashMap.Entry toBeAdded){
         if(numElements == data.length){
             grow();
         }
@@ -101,7 +103,7 @@ public class DynamicArray {
      *
      * @author Eoghan Carroll
      */
-    public void add(String toBeAdded, int positionToInsert){
+    public void add(UserHashMap.Entry toBeAdded, int positionToInsert){
         if(positionToInsert < 0 || positionToInsert >= numElements){
             throw new IndexOutOfBoundsException("String cannot be added to this position as it is outside the boundaries of the array");
         }
@@ -132,12 +134,12 @@ public class DynamicArray {
      *
      * @author Eoghan Carroll
      */
-    public String set(String toBeAdded, int positionToInsert){
+    public UserHashMap.Entry set(UserHashMap.Entry toBeAdded, int positionToInsert){
         if(positionToInsert >= data.length || positionToInsert < 0){
             throw new IndexOutOfBoundsException("Position entered is outside the boundaries of the dynamic array");
         }
 
-        String stored = data[positionToInsert];
+        UserHashMap.Entry stored = data[positionToInsert];
 
         data[positionToInsert] = toBeAdded;
 
@@ -156,12 +158,12 @@ public class DynamicArray {
      *
      * @author Eoghan Carroll
      */
-    public String remove(int positionToRemove){
+    public UserHashMap.Entry remove(int positionToRemove){
         if(positionToRemove < 0 || positionToRemove >= numElements){
             throw new IndexOutOfBoundsException("Position entered is outside the boundaries of the dynamic array");
         }
 
-        String deletedElement = data[positionToRemove];
+        UserHashMap.Entry deletedElement = data[positionToRemove];
 
         System.arraycopy(data, positionToRemove+1, data, positionToRemove, (numElements-(positionToRemove+1)));
         data[numElements-1] = null;
@@ -191,7 +193,7 @@ public class DynamicArray {
      * @author Eoghan Carroll
      */
     private void grow(){
-        String [] expandedArray = new String [data.length * RESIZE_FACTOR];
+        UserHashMap.Entry[] expandedArray = new UserHashMap.Entry [data.length * RESIZE_FACTOR];
 
         System.arraycopy(data, 0, expandedArray, 0, data.length);
 
