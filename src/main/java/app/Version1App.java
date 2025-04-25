@@ -176,12 +176,16 @@ public class Version1App {
                     if(agentCount==0){
                         id = id + map.generateAgentNum();
                     }else{
-                        id = id + map.generateAgentNum() + agentCount;
+                        id = id + (map.generateAgentNum() + agentCount);
                     }
                     Agent agent = new Agent(username, password, id, name);
                     map.put(username, agent);
 
                     end = true;
+
+                    //Outputting the new agent into their text file
+                    FileOutput f = new FileOutput();
+                    f.writeAgent(agent);
                 }else{
                     System.out.println("Please enter a valid answer");
                 }
