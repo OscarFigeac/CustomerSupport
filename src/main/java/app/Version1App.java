@@ -160,6 +160,7 @@ public class Version1App {
                 int option = kb.nextInt();
                 switch (option){
                     case 1:
+                        kb.nextLine();
                         System.out.println("Please write the issue");
                         String description = kb.nextLine();
                         Ticket newTicket = new Ticket(currentUser.getUsername().substring(0,3), description, 1, LocalDateTime.now(), currentUser.getUsername(), "Unassigned", "Pending");
@@ -169,6 +170,7 @@ public class Version1App {
                     case 2:
                         break;
                     case 3:
+                        kb.nextLine();
                         break;
                     case 4:
                         kb.nextLine();
