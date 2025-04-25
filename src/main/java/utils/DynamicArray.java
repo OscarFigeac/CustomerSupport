@@ -84,6 +84,21 @@ public class DynamicArray {
         return stored;
     }
 
+    //Remove()
+    public String remove(int positionToRemove){
+        if(positionToRemove < 0 || positionToRemove >= numElements){
+            throw new IndexOutOfBoundsException("Position entered is outside the boundaries of the dynamic array");
+        }
+
+        String deletedElement = data[positionToRemove];
+
+        System.arraycopy(data, positionToRemove+1, data, positionToRemove, (numElements-(positionToRemove+1)));
+        data[numElements-1] = null;
+        numElements--;
+
+        return deletedElement;
+    }
+
 
     //Private Features:
     private void grow(){
