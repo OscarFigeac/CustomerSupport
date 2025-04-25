@@ -171,9 +171,11 @@ public class Version1App {
                     case 3:
                         break;
                     case 4:
+                        kb.nextLine();
                         System.out.println("Are you sure you want to log out?");
                         System.out.println("Y/N");
-                        if(kb.nextLine().equalsIgnoreCase("Y")){
+                        String logout = kb.nextLine();
+                        if(logout.equalsIgnoreCase("Y")){
                             end = true;
                         }
                 }
