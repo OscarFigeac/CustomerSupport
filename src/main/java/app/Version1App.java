@@ -3,17 +3,20 @@ package app;
 import business.Agent;
 import business.Ticket;
 import business.User;
+import utils.FileOutput;
 import utils.LinkedList;
 import utils.PriorityQueue;
 import utils.UserHashMap;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Version1App {
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException {
         UserHashMap map = new UserHashMap();
         PriorityQueue tickets = new PriorityQueue();
 
@@ -147,6 +150,10 @@ public class Version1App {
 
                     end = true;
 
+                    //Outputting the new user into the text file
+                    FileOutput f = new FileOutput();
+                    f.writeUser(user);
+
                 } else if (answer.equalsIgnoreCase("agent")) {
                     boolean usernameExists = true;
                     String username = null;
@@ -169,12 +176,16 @@ public class Version1App {
                     if(agentCount==0){
                         id = id + map.generateAgentNum();
                     }else{
-                        id = id + map.generateAgentNum() + agentCount;
+                        id = id + (map.generateAgentNum() + agentCount);
                     }
                     Agent agent = new Agent(username, password, id, name);
                     map.put(username, agent);
 
                     end = true;
+
+                    //Outputting the new agent into their text file
+                    FileOutput f = new FileOutput();
+                    f.writeAgent(agent);
                 }else{
                     System.out.println("Please enter a valid answer");
                 }
@@ -269,6 +280,9 @@ public class Version1App {
                         ticketNum++;
                         Ticket newTicket = new Ticket(ticketID, description, priority, LocalDateTime.now(), currentUser.getUsername(), "Unassigned", "Pending");
                         tickets.enqueue(newTicket);
+
+
+
                         System.out.println("Your ticket has been recorded");
                         break;
                     case 2:
