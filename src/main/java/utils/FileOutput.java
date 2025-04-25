@@ -8,6 +8,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileOutput {
+    /**
+     * Writes the user provided into the UserData text file
+     * @param user User object being entered
+     * @throws IOException If the code encounters an exception
+     * @author Tomasz Januszkewicz
+     */
     public void writeUser(User user) throws IOException {
         try(FileWriter fileWrite = new FileWriter("src/main/java/data/UserData", true);
             BufferedWriter bufferedWrite = new BufferedWriter(fileWrite)){
@@ -19,6 +25,11 @@ public class FileOutput {
         }
     }
 
+    /**
+     * Writes the agent provided into the AgentData text file
+     * @param agent Agent object being entered
+     * @throws IOException If the code encounters an exception
+     */
     public void writeAgent(Agent agent) throws IOException{
         try(FileWriter fileWrite = new FileWriter("src/main/java/data/AgentData", true);
             BufferedWriter bufferedWrite = new BufferedWriter(fileWrite)){
