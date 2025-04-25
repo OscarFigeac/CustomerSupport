@@ -1,6 +1,6 @@
 package utils;
 
-import business.User;
+import business.Ticket;
 
 public class LinkedList {
     private int numOfElements;
@@ -37,7 +37,7 @@ public class LinkedList {
      * @throws IllegalArgumentException if the parameter is null
      * @author Oscar Figeac
      */
-    public void add(User user){
+    public void add(Ticket user){
         if (user == null){
             throw new IllegalArgumentException("Passed parameter cannot be null");
         }
@@ -60,7 +60,7 @@ public class LinkedList {
      * greater than the number of elements
      * @author Oscar Figeac
      */
-    public User get(int pos) {
+    public Ticket get(int pos) {
         if (isEmpty() || pos < 0 || pos >= numOfElements) {
             throw new IndexOutOfBoundsException("Index must be between 0 and " + (numOfElements-1) + ". " +
                     "(Supplied index was " + pos + ").");
@@ -72,7 +72,7 @@ public class LinkedList {
         return current.data;
     }
 
-    public User remove(int pos){
+    public Ticket remove(int pos){
         if(isEmpty() || pos < 0 || pos >= numOfElements){
             throw new IndexOutOfBoundsException("Index must be between 0 and " + (numOfElements-1) + " inclusive. " +
                     "(Supplied" +
@@ -80,7 +80,7 @@ public class LinkedList {
                     " " + pos+")");
         }
 
-        User removed = null;
+        Ticket removed = null;
         if (pos == 0){
             removed = first.data;
             first = first.next;
@@ -114,7 +114,7 @@ public class LinkedList {
      * @throws IllegalArgumentException if the provided data is null
      * @author Oscar Figeac
      */
-    public int indexOf(User user){
+    public int indexOf(Ticket user){
         if (user == null){
             throw new IllegalArgumentException("Passed parameter cannot be null");
         }
@@ -130,10 +130,10 @@ public class LinkedList {
     }
 
     public static class Node {
-        private User data;
+        private Ticket data;
         private Node next;
 
-        public Node(User data) {
+        public Node(Ticket data) {
             this.data = data;
             this.next = null;
         }
