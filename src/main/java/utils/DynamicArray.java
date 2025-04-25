@@ -71,6 +71,19 @@ public class DynamicArray {
         numElements++;
     }
 
+    //Set
+    public String set(String toBeAdded, int positionToInsert){
+        if(positionToInsert >= data.length || positionToInsert < 0){
+            throw new IndexOutOfBoundsException("Position entered is outside the boundaries of the dynamic array");
+        }
+
+        String stored = data[positionToInsert];
+
+        data[positionToInsert] = toBeAdded;
+
+        return stored;
+    }
+
 
     //Private Features:
     private void grow(){
