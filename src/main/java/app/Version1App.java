@@ -241,8 +241,6 @@ public class Version1App {
         }
 
         //Main app
-            //Required standard user ticket-handling functionality:
-                //TODO: View the details of one of their tickets
         //user creates a ticket
         if (userType == 'u') {
             boolean end = false;
@@ -314,6 +312,29 @@ public class Version1App {
                         break;
                     case 3:
                         kb.nextLine();
+                        found = false;
+                        userTickets = new PriorityQueue();
+                        System.out.println("Enter the ticket ID you want to see the description of");
+                        String id = kb.nextLine();
+
+                        while(!tickets.isEmpty()){
+                            Ticket ticket = tickets.dequeue();
+                            if(ticket.getUsername().equals(currentUser.getUsername()) && ticket.getTicketId().equals(id)) {
+                                System.out.println("Ticket ID: (" + ticket.getTicketId() + ")");
+                                System.out.println("Description: " + ticket.getIssueDesc());
+
+                                found = true;
+                            }
+                            userTickets.enqueue(ticket);
+                        }
+
+                        while(!userTickets.isEmpty()){
+                            tickets.enqueue(userTickets.dequeue());
+                        }
+
+                        if(!found){
+                            System.out.println("No tickets were found");
+                        }
                         break;
                     case 4:
                         kb.nextLine();
