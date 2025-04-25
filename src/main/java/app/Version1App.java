@@ -277,10 +277,12 @@ public class Version1App {
                         }
                         String ticketID = currentUser.getUsername().substring(0,3) + ticketNum;
                         ticketNum++;
-                        Ticket newTicket = new Ticket(ticketID, description, priority, LocalDateTime.now(), currentUser.getUsername(), "Unassigned", "Pending");
+                        Ticket newTicket = new Ticket(ticketID, description, priority, LocalDateTime.now(),
+                                currentUser.getUsername(), "Unassigned", "Pending");
                         tickets.enqueue(newTicket);
 
-
+                        FileOutput f = new FileOutput();
+                        f.writeTicket(newTicket);
 
                         System.out.println("Your ticket has been recorded");
                         break;
