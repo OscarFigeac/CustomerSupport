@@ -23,6 +23,20 @@ public class UserHashMap {
             this.key = value.getUsername();
             this.value = value;
         }
+
+        public String getKey(){
+            return key;
+        }
+
+        public User getValue(){
+            return value;
+        }
+
+        public User updateValue(User newValue){
+            User oldValue = value;
+            this.value = newValue;
+            return oldValue;
+        }
     }
 
     /**
