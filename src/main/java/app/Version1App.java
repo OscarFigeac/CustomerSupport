@@ -306,6 +306,42 @@ public class Version1App {
                         }
                         break;
                     case 5:
+                        System.out.println("Changing ticket status...");
+                        if (currentAgent != null && currentAgent.getAgentID() != null){
+                            System.out.println("Enter the new status (Pending, In Progress, Stalled, Solved):");
+                            System.out.println("Enter the ID of your assigned ticket to update:");
+                            String toBeUpdated = kb.nextLine();
+                            System.out.println("Enter the new status (Pending, In Progress, Stalled, Solved):");
+                            String newStatusStr = kb.nextLine();
+                            String newStatus = Ticket.statusOptions(newStatusStr); //using the statusOption method from the Ticket class
+
+                            if (newStatus == null){
+                                System.out.println("Invalid status entered");
+                                break;
+                            }
+
+                            PriorityQueue tempQueue3 = new PriorityQueue();
+                            boolean updated = false;
+                            while(!tickets.isEmpty()){
+                                Ticket ticket = tickets.dequeue();
+                                if (ticket.getAgentId() != null && ticket.getAgentId().equals(currentAgent.getAgentID()) &&
+                                        ticket.getTicketId().equals(toBeUpdated)){
+                                    ticket.setStatus(newStatus);
+                                    System.out.println("Ticket " + toBeUpdated + " status has been updated to: " +
+                                            newStatus);
+                                    updated = true;
+                                }
+                            }
+
+                            while(!tempQueue3.isEmpty()){
+                                tickets.enqueue(tempQueue3.dequeue());
+                            }
+                            if (!updated){
+                                System.out.println("Ticket " + toBeUpdated + " could not be found");
+                            }
+                        } else{
+                            System.out.println("Unauthorised access");
+                        }
                         break;
                     case 6:
                         kb.nextLine();
