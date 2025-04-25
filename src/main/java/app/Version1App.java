@@ -118,7 +118,7 @@ public class Version1App {
         }
 
 
-        //Required authentication functionality
+        //Authentication
         //Creating an account - Tomasz
 
         if(!existingAccount){
@@ -242,7 +242,6 @@ public class Version1App {
 
         //Main app
             //Required standard user ticket-handling functionality:
-                //TODO: view the list of their tickets (open and closed)
                 //TODO: View the details of one of their tickets
         //user creates a ticket
         if (userType == 'u') {
@@ -287,6 +286,31 @@ public class Version1App {
                         System.out.println("Your ticket has been recorded");
                         break;
                     case 2:
+                        boolean found = false;
+                        PriorityQueue userTickets = new PriorityQueue();
+
+                        while(!tickets.isEmpty()){
+                            Ticket ticket = tickets.dequeue();
+                            boolean isAssigned = false;
+                            if(!ticket.getAgentId().equalsIgnoreCase("Unassigned")){
+                                isAssigned = true;
+                            }
+                            if(ticket.getUsername().equals(currentUser.getUsername())) {
+                                System.out.println("Ticket ID: (" + ticket.getTicketId() + ") Status: ("
+                                        + ticket.getStatus() + ") Assigned to an agent: (" + isAssigned + ")");
+
+                                found = true;
+                            }
+                            userTickets.enqueue(ticket);
+                        }
+
+                        while(!userTickets.isEmpty()){
+                            tickets.enqueue(userTickets.dequeue());
+                        }
+
+                        if(!found){
+                            System.out.println("No tickets were found");
+                        }
                         break;
                     case 3:
                         kb.nextLine();
@@ -302,6 +326,7 @@ public class Version1App {
                 }
             }
         }
+
         if (userType == 'a') { //Oscar Figeac
             boolean end = false;
 
