@@ -159,7 +159,7 @@ public class Ticket {
      *
      * @author Eoghan Carroll
      */
-    private static String statusOptions(String stat){
+    public static String statusOptions(String stat){
         Scanner kb = new Scanner(System.in);
         String option1 = "Pending";
         String option2 = "In Progress";
