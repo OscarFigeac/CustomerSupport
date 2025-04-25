@@ -163,7 +163,22 @@ public class Version1App {
                         kb.nextLine();
                         System.out.println("Please write the issue");
                         String description = kb.nextLine();
-                        Ticket newTicket = new Ticket(currentUser.getUsername().substring(0,3), description, 1, LocalDateTime.now(), currentUser.getUsername(), "Unassigned", "Pending");
+                        boolean correctPriority = false;
+                        int priority = -1;
+                        while(!correctPriority) {
+                            System.out.println("Please enter the priority of your ticket (Number between 1 and 5).");
+                            System.out.println("1: Very low priority, the issue does not have an extreme effect on the program");
+                            System.out.println("5: Extreme priority, the issue may be threatening the program");
+                            priority = kb.nextInt();
+
+                            if(priority < 1 || priority > 5){
+                                System.out.println("ERROR:The priority must be between 1 and 5");
+                                System.out.println("You entered " + priority);
+                            } else {
+                                correctPriority = true;
+                            }
+                        }
+                        Ticket newTicket = new Ticket(currentUser.getUsername().substring(0,3), description, priority, LocalDateTime.now(), currentUser.getUsername(), "Unassigned", "Pending");
                         tickets.enqueue(newTicket);
                         System.out.println("Your ticket has been recorded");
                         break;
