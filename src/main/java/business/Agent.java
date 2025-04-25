@@ -10,6 +10,10 @@ public class Agent extends User{
         this.agentName = agentName;
     }
 
+    public Agent(){
+        super();
+    }
+
     /**
      * Validates a passed parameter of the type String
      * @param toBeValidated the parameter to be validated
