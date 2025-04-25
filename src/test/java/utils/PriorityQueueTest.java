@@ -150,6 +150,31 @@ class PriorityQueueTest {
     }
 
     @Test
-    void dequeue() {
+    void dequeue_Empty() {
+        PriorityQueue test = new PriorityQueue();
+        assertEquals(null, test.dequeue());
+    }
+
+    @Test
+    void dequeue_OneElement(){
+        PriorityQueue test = new PriorityQueue();
+        Ticket ticket = new Ticket("123", "Test", 3, LocalDateTime.now(), "Oscar", "o123", "Stalled");
+        test.enqueue(ticket);
+        Ticket dequeued = test.dequeue();
+        assertEquals(ticket, dequeued, "Deleted object should be the same");
+    }
+
+    @Test
+    void dequeue_MultipleElements(){
+        PriorityQueue test = new PriorityQueue();
+        Ticket ticket1 = new Ticket("123", "Test", 3, LocalDateTime.now(), "Oscar", "o123", "Stalled");
+        Ticket ticket2 = new Ticket("123", "Test", 1, LocalDateTime.now(), "Oscar", "o123", "Stalled");
+        Ticket ticket3 = new Ticket("123", "Test", 2, LocalDateTime.now(), "Oscar", "o123", "Stalled");
+        test.enqueue(ticket1);
+        test.enqueue(ticket2);
+        test.enqueue(ticket3);
+
+        Ticket dequeued = test.dequeue();
+        assertEquals(ticket2, dequeued, "Deleted object should be the same and the highest priority");
     }
 }
