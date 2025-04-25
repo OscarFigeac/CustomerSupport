@@ -39,7 +39,34 @@ class PriorityQueueTest {
     }
 
     @Test
-    void compare() {
+    void compare_LowPriorityFirst() {
+        PriorityQueue test = new PriorityQueue();
+        Ticket ticket = new Ticket("123", "Test", 5, LocalDateTime.now(), "Oscar", "o123", "Stalled");
+        Ticket ticket1 = new Ticket("123", "Test", 1, LocalDateTime.now(), "Oscar", "o123", "Stalled");
+        assertTrue(test.compare(ticket, ticket1) > 0);
+    }
+
+    @Test
+    void compare_HighPriorityFirst() {
+        PriorityQueue test = new PriorityQueue();
+        Ticket ticket = new Ticket("123", "Test", 1, LocalDateTime.now(), "Oscar", "o123", "Stalled");
+        Ticket ticket1 = new Ticket("123", "Test", 3, LocalDateTime.now(), "Oscar", "o123", "Stalled");
+        assertTrue(test.compare(ticket, ticket1) < 0);
+    }
+
+    @Test
+    void compare_SamePriority() {
+        PriorityQueue test = new PriorityQueue();
+        Ticket ticket = new Ticket("123", "Test", 1, LocalDateTime.now(), "Oscar", "o123", "Stalled");
+        Ticket ticket1 = new Ticket("123", "Test", 1, LocalDateTime.now(), "Oscar", "o123", "Stalled");
+        assertEquals(0, test.compare(ticket, ticket1));
+    }
+
+    @Test
+    void compare_ExceptionHandling() {
+        PriorityQueue test = new PriorityQueue();
+        Ticket ticket = new Ticket("123", "Test", 1, LocalDateTime.now(), "Oscar", "o123", "Stalled");
+        assertThrows(IllegalArgumentException.class, () -> test.compare(ticket, null), "Should throw an exception");
     }
 
     @Test
