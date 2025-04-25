@@ -201,8 +201,6 @@ public class Version1App {
             }
         }
             //Required Agent ticket-handling functionality (in addition to the standard user functionality listed above):
-                //TODO: View all unassigned open tickets
-                //TODO: View their currently assigned tickets
                 //TODO: Assign themselves a new ticket – this should take the unassigned ticket with the highest priority
                 //TODO: View the details of one of their assigned tickets
                 /*TODO: Change the status on one of their assigned tickets.
@@ -223,7 +221,7 @@ public class Version1App {
                 int option = kb.nextInt();
                 switch (option){
                     case 1:
-                        System.out.println("\n Looking for unassigned open tickets");
+                        System.out.println("Looking for unassigned open tickets");
                         boolean found = false;
                         PriorityQueue tempQueue = new PriorityQueue(); //Created to iterate without risk of losing order
 
@@ -244,7 +242,7 @@ public class Version1App {
                         }
                         break;
                     case 2:
-                        System.out.println("\n Looking for tickets assigned to you");
+                        System.out.println("Looking for tickets assigned to you");
                         boolean foundAgent = false;
                         PriorityQueue tempQueue1 = new PriorityQueue(); //Created to iterate without risk of losing order
                         if (currentAgent != null) {
@@ -268,7 +266,20 @@ public class Version1App {
                         }
                         break;
                     case 3:
-                        kb.nextLine();
+                        System.out.println("Assigning a new ticket");
+                        if (currentAgent != null){
+                            Ticket highestPriority = tickets.peek();
+                            if (highestPriority != null && highestPriority.getAgentId() == null
+                            && !highestPriority.getStatus().equalsIgnoreCase("Solved")){
+                                Ticket assigned = tickets.dequeue();
+                                assigned.setAgentId(currentAgent.getAgentID());
+                                System.out.println("Ticket number " + assigned.getTicketId() + " has been assigned to you");
+                            } else {
+                                System.out.println("No tickets could be assigned to you");
+                            }
+                        } else {
+                            System.out.println("Unauthorised access");
+                        }
                         break;
                     case 4:
                         break;
