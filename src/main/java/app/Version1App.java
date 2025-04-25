@@ -40,8 +40,9 @@ public class Version1App {
             String number = agentID.substring(4);
             int tempNum = Integer.parseInt(number);
             if(tempNum > agentCount) {
-                agentCount = Integer.parseInt(number);
+                agentCount = tempNum;
             }
+
             map.put(inputAgent.getUsername(), inputAgent);
         }
 
@@ -62,6 +63,7 @@ public class Version1App {
         //Reading all the Ticket data
         File ticketData = new File("src/main/java/data/TicketData");
         fileInput = new Scanner(ticketData);
+        int ticketNum = 0;
         while(fileInput.hasNextLine()){
             String ticketID = fileInput.nextLine();
             ticketID = ticketID.substring(ticketID.indexOf("(" )+1, ticketID.indexOf(")"));
@@ -88,6 +90,12 @@ public class Version1App {
 
             Ticket inputTicket = new Ticket(ticketID, issueDesc, priority, creation, username, agentId, status);
             tickets.enqueue(inputTicket);
+
+            String number = ticketID.substring(3);
+            int tempNum = Integer.parseInt(number);
+            if(tempNum > ticketNum){
+                ticketNum = tempNum;
+            }
         }
 
         //Welcome screen - Tomasz Januszkiewicz
@@ -257,7 +265,9 @@ public class Version1App {
                                 correctPriority = true;
                             }
                         }
-                        Ticket newTicket = new Ticket(currentUser.getUsername().substring(0,3), description, priority, LocalDateTime.now(), currentUser.getUsername(), "Unassigned", "Pending");
+                        String ticketID = currentUser.getUsername().substring(0,3) + ticketNum;
+                        ticketNum++;
+                        Ticket newTicket = new Ticket(ticketID, description, priority, LocalDateTime.now(), currentUser.getUsername(), "Unassigned", "Pending");
                         tickets.enqueue(newTicket);
                         System.out.println("Your ticket has been recorded");
                         break;
