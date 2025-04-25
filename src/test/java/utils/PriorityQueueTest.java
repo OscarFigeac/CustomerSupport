@@ -177,4 +177,5 @@ class PriorityQueueTest {
         Ticket dequeued = test.dequeue();
         assertEquals(ticket2, dequeued, "Deleted object should be the same and the highest priority");
     }
+
 }
