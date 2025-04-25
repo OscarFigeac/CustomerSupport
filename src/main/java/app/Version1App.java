@@ -156,7 +156,7 @@ public class Version1App {
                 System.out.println("(1) Create a ticket");
                 System.out.println("(2) View your tickets");
                 System.out.println("(3) View one of your tickets");
-                System.out.println("(4) Log out");
+                System.out.println("(4) Logout");
                 int option = kb.nextInt();
                 switch (option){
                     case 1:
@@ -192,6 +192,41 @@ public class Version1App {
                 - Tickets with a solved/closed status should be removed from the Agent’s collection of open tickets
                     and moved to their collection of closed tickets.
                 */
+        if (userType == 'a') {
+            boolean end = false;
+
+            while (!end) {
+                System.out.println("What would you like to do?");
+                System.out.println("(1) View all unassigned open tickets");
+                System.out.println("(2) View tickets assigned to you");
+                System.out.println("(3) Assign a new ticket to yourself");
+                System.out.println("(4) View the details of one of your tickets");
+                System.out.println("(5) Change the status of a ticket");
+                System.out.println("(6) Logout");
+                int option = kb.nextInt();
+                switch (option){
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        kb.nextLine();
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                    case 6:
+                        kb.nextLine();
+                        System.out.println("Are you sure you want to log out?");
+                        System.out.println("Y/N");
+                        String logout = kb.nextLine();
+                        if(logout.equalsIgnoreCase("Y")){
+                            end = true;
+                        }
+                }
+            }
+        }
 
     }
 }
