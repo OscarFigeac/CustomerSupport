@@ -14,7 +14,6 @@ public class Version1App {
     public static void main(String[] args) {
         UserHashMap map = new UserHashMap();
         PriorityQueue tickets = new PriorityQueue();
-        LinkedList t = new LinkedList();
 
         Scanner kb = new Scanner(System.in);
 
@@ -201,7 +200,6 @@ public class Version1App {
             }
         }
             //Required Agent ticket-handling functionality (in addition to the standard user functionality listed above):
-                //TODO: Assign themselves a new ticket – this should take the unassigned ticket with the highest priority
                 //TODO: View the details of one of their assigned tickets
                 /*TODO: Change the status on one of their assigned tickets.
                 - Tickets with a solved/closed status should be removed from the Agent’s collection of open tickets
@@ -221,7 +219,7 @@ public class Version1App {
                 int option = kb.nextInt();
                 switch (option){
                     case 1:
-                        System.out.println("Looking for unassigned open tickets");
+                        System.out.println("Looking for unassigned open tickets...");
                         boolean found = false;
                         PriorityQueue tempQueue = new PriorityQueue(); //Created to iterate without risk of losing order
 
@@ -242,7 +240,7 @@ public class Version1App {
                         }
                         break;
                     case 2:
-                        System.out.println("Looking for tickets assigned to you");
+                        System.out.println("Looking for tickets assigned to you...");
                         boolean foundAgent = false;
                         PriorityQueue tempQueue1 = new PriorityQueue(); //Created to iterate without risk of losing order
                         if (currentAgent != null) {
@@ -256,6 +254,8 @@ public class Version1App {
                                 }
                                 tempQueue1.enqueue(ticket);
                             }
+                        } else {
+                            System.out.println("Unauthorised access");
                         }
                         //Add everything back on to keep the order
                         while(!tempQueue1.isEmpty()){
@@ -266,7 +266,7 @@ public class Version1App {
                         }
                         break;
                     case 3:
-                        System.out.println("Assigning a new ticket");
+                        System.out.println("Assigning a new ticket...");
                         if (currentAgent != null){
                             Ticket highestPriority = tickets.peek();
                             if (highestPriority != null && highestPriority.getAgentId() == null
@@ -282,6 +282,28 @@ public class Version1App {
                         }
                         break;
                     case 4:
+                        System.out.println("Ticket details:");
+                        if (currentAgent != null && currentAgent.getAgentID() != null){
+                            PriorityQueue tempQueue2 = new PriorityQueue();
+                            boolean foundTickets = false;
+
+                            while (!tickets.isEmpty()){
+                                Ticket ticket = tickets.dequeue();
+                                if (ticket.getAgentId() != null && ticket.getAgentId().equalsIgnoreCase(currentAgent.getAgentID())){
+                                    System.out.println(ticket);
+                                    foundTickets = true;
+                                }
+                                tempQueue2.enqueue(ticket);
+                            }
+                            while (!tempQueue2.isEmpty()){
+                                tickets.enqueue(tempQueue2.dequeue());
+                            }
+                            if (!foundTickets){
+                                System.out.println("No tickets are assigned to you");
+                            }
+                        } else {
+                            System.out.println("Unauthorised access");
+                        }
                         break;
                     case 5:
                         break;
