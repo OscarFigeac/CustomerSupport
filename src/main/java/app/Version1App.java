@@ -199,7 +199,7 @@ public class Version1App {
                 }
             }
         }
-        if (userType == 'a') {
+        if (userType == 'a') { //Oscar Figeac
             boolean end = false;
 
             while (!end) {
