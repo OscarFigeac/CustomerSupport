@@ -229,7 +229,7 @@ public class Version1App {
 
                         while(!tickets.isEmpty()){
                             Ticket ticket = tickets.dequeue();
-                            if (ticket.getAgentId() == null && !ticket.getStatus().equalsIgnoreCase("Solved")){
+                            if (ticket.getAgentId() == null && !ticket.getStatus().equalsIgnoreCase("Solved")){ // it only finds unsolved tickets
                                 System.out.println(ticket);
                                 found = true;
                             }
@@ -244,6 +244,28 @@ public class Version1App {
                         }
                         break;
                     case 2:
+                        System.out.println("\n Looking for tickets assigned to you");
+                        boolean foundAgent = false;
+                        PriorityQueue tempQueue1 = new PriorityQueue(); //Created to iterate without risk of losing order
+                        if (currentAgent != null) {
+                            while (!tickets.isEmpty()) {
+                                Ticket ticket = tickets.dequeue();
+                                if (currentAgent.getAgentID() == null && ticket.getAgentId() != null
+                                && ticket.getAgentId().equalsIgnoreCase(currentAgent.getAgentID()) &&
+                                !ticket.getStatus().equalsIgnoreCase("Solved")) { //it only finds unsolved tickets
+                                    System.out.println(ticket);
+                                    foundAgent = true;
+                                }
+                                tempQueue1.enqueue(ticket);
+                            }
+                        }
+                        //Add everything back on to keep the order
+                        while(!tempQueue1.isEmpty()){
+                            tickets.enqueue(tempQueue1.dequeue());
+                        }
+                        if (!foundAgent){
+                            System.out.println("No tickets were found");
+                        }
                         break;
                     case 3:
                         kb.nextLine();
