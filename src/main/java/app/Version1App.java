@@ -5,6 +5,7 @@ import business.User;
 import utils.UserHashMap;
 
 import java.util.Scanner;
+import java.util.UUID;
 
 public class Version1App {
     public static void main(String[] args) {
@@ -31,9 +32,7 @@ public class Version1App {
 
 
         //Required authentication functionality
-        //Tomasz
-        User user = new User(null, null);
-        User agent = new Agent(null, null, null, null);
+        //Creating an account - Tomasz
 
         if(!existingAccount){
             boolean end = false;
@@ -47,17 +46,17 @@ public class Version1App {
                     while(usernameExists) {
                         System.out.println("Enter a username");
                         username = kb.nextLine();
-                        if(map.containsKey(username)){
-                            System.out.println("Username is taken");
-                        }else if(username.length() < 5){
+                        if(username.length() < 5){
                             System.out.println("The username must contain at least 5 characters");
+                        }else if(map.containsKey(username)){
+                            System.out.println("Username is taken");
                         }else{
                             usernameExists = false;
                         }
                     }
                     System.out.println("Enter a password");
                     String password = kb.nextLine();
-                    user = new User(username, password);
+                    User user = new User(username, password);
                     map.put(username, user);
 
                     end = true;
@@ -68,10 +67,10 @@ public class Version1App {
                     while(usernameExists) {
                         System.out.println("Enter a username");
                         username = kb.nextLine();
-                        if(map.containsKey(username)){
-                            System.out.println("Username is taken");
-                        }else if(username.length() < 5){
+                        if(username.length() < 5){
                             System.out.println("The username must contain at least 5 characters");
+                        }else if(map.containsKey(username)){
+                            System.out.println("Username is taken");
                         }else{
                             usernameExists = false;
                         }
@@ -81,8 +80,8 @@ public class Version1App {
                     System.out.println("Enter your name");
                     String name = kb.nextLine();
                     String id = name.substring(0,2) + name.substring(username.length()/2, (username.length()/2)+2) + map.generateAgentNum();
-                    agent = new Agent(username, password, id, name);
-                    map.put(username, user);
+                    Agent agent = new Agent(username, password, id, name);
+                    map.put(username, agent);
 
                     end = true;
                 }else{
@@ -91,9 +90,54 @@ public class Version1App {
             }
         }
 
-            /*TODO: Users can log in if they provide valid credentials.
-                - They should not need to state if they are logging in as a User or an Agent.
-            */
+
+        //User login - Tomasz
+        final int MAX_ATTEMPTS = 5;
+        int attempts = 0;
+        //keeps track of who they are
+        User currentUser = null;
+        Agent currentAgent = null;
+        char userType = 'e'; //a for agent - u for user - e for empty
+
+        boolean retryLogin = true;
+        while(retryLogin) {
+            System.out.println("Please enter your username");
+            String username = kb.nextLine();
+            System.out.println("Please enter your password");
+            String password = kb.nextLine();
+            if(username.length() < 5){
+                System.out.println("Username or password is incorrect, please try again");
+            }
+            else if (password.isEmpty()) {
+                System.out.println("Username or password is incorrect, please try again");
+            }
+            else if(!map.containsKey(username)){
+                System.out.println("Username or password is incorrect, please try again");
+            }
+            else if (!map.get(username).getPassword().equals(password)) {
+                System.out.println("Username or password is incorrect, please try again");
+            }
+            else{
+                if(map.get(username) instanceof Agent) {
+                    currentAgent = new Agent(username, password, ((Agent) map.get(username)).getAgentID(), ((Agent) map.get(username)).getAgentName());
+                    System.out.println("Welcome " + currentAgent.getAgentName());
+                    retryLogin = false;
+                    userType = 'a';
+                }else {
+                    currentUser = new User(username, password);
+                    System.out.println("Welcome " + currentUser.getUsername());
+                    retryLogin = false;
+                    userType = 'u';
+                }
+            }
+
+            if(attempts == MAX_ATTEMPTS){
+                System.out.println("Too many failed attempts, please try again later");
+                break;
+            }else{
+                attempts++;
+            }
+        }
 
         //Main app
             //Required standard user ticket-handling functionality:
